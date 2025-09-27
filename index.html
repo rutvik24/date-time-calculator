@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Time Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Date Time Calculator</h1>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab(event, 'date-tab')">Date</button>
+            <button class="tab-btn" onclick="openTab(event, 'time-tab')">Time</button>
+            <button class="tab-btn" onclick="openTab(event, 'datetime-tab')">DateTime</button>
+        </div>
+        
+        <!-- Date Calculator Tab -->
+        <div id="date-tab" class="tab-content active">
+            <h2>Date Calculator</h2>
+            
+            <!-- Date Difference Calculator -->
+            <div class="calculator-section">
+                <h3>Date Difference</h3>
+                <div class="input-group">
+                    <label>Start Date:</label>
+                    <input type="date" id="date-start" class="date-input">
+                </div>
+                <div class="input-group">
+                    <label>End Date:</label>
+                    <input type="date" id="date-end" class="date-input">
+                </div>
+                <button onclick="calculateDateDifference()" class="calculate-btn">Calculate Difference</button>
+                <div id="date-difference-result" class="result"></div>
+            </div>
+            
+            <!-- Date Addition/Subtraction -->
+            <div class="calculator-section">
+                <h3>Date Addition/Subtraction</h3>
+                <div class="input-group">
+                    <label>Base Date:</label>
+                    <input type="date" id="date-base" class="date-input">
+                </div>
+                <div class="input-group">
+                    <label>Operation:</label>
+                    <select id="date-operation">
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Value:</label>
+                    <input type="number" id="date-value" min="0" class="number-input">
+                </div>
+                <div class="input-group">
+                    <label>Unit:</label>
+                    <select id="date-unit">
+                        <option value="days">Days</option>
+                        <option value="weeks">Weeks</option>
+                        <option value="months">Months</option>
+                        <option value="years">Years</option>
+                    </select>
+                </div>
+                <button onclick="calculateDateAddSubtract()" class="calculate-btn">Calculate</button>
+                <div id="date-addsub-result" class="result"></div>
+            </div>
+        </div>
+        
+        <!-- Time Calculator Tab -->
+        <div id="time-tab" class="tab-content">
+            <h2>Time Calculator</h2>
+            
+            <!-- Time Difference Calculator -->
+            <div class="calculator-section">
+                <h3>Time Difference</h3>
+                <div class="input-group">
+                    <label>Start Time:</label>
+                    <input type="time" id="time-start" class="time-input">
+                </div>
+                <div class="input-group">
+                    <label>End Time:</label>
+                    <input type="time" id="time-end" class="time-input">
+                </div>
+                <button onclick="calculateTimeDifference()" class="calculate-btn">Calculate Difference</button>
+                <div id="time-difference-result" class="result"></div>
+            </div>
+            
+            <!-- Time Addition/Subtraction -->
+            <div class="calculator-section">
+                <h3>Time Addition/Subtraction</h3>
+                <div class="input-group">
+                    <label>Base Time:</label>
+                    <input type="time" id="time-base" class="time-input">
+                </div>
+                <div class="input-group">
+                    <label>Operation:</label>
+                    <select id="time-operation">
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Value:</label>
+                    <input type="number" id="time-value" min="0" class="number-input">
+                </div>
+                <div class="input-group">
+                    <label>Unit:</label>
+                    <select id="time-unit">
+                        <option value="seconds">Seconds</option>
+                        <option value="minutes">Minutes</option>
+                        <option value="hours">Hours</option>
+                    </select>
+                </div>
+                <button onclick="calculateTimeAddSubtract()" class="calculate-btn">Calculate</button>
+                <div id="time-addsub-result" class="result"></div>
+            </div>
+        </div>
+        
+        <!-- DateTime Calculator Tab -->
+        <div id="datetime-tab" class="tab-content">
+            <h2>DateTime Calculator</h2>
+            
+            <!-- DateTime Difference Calculator -->
+            <div class="calculator-section">
+                <h3>DateTime Difference</h3>
+                <div class="input-group">
+                    <label>Start DateTime:</label>
+                    <input type="datetime-local" id="datetime-start" class="datetime-input">
+                </div>
+                <div class="input-group">
+                    <label>End DateTime:</label>
+                    <input type="datetime-local" id="datetime-end" class="datetime-input">
+                </div>
+                <button onclick="calculateDateTimeDifference()" class="calculate-btn">Calculate Difference</button>
+                <div id="datetime-difference-result" class="result"></div>
+            </div>
+            
+            <!-- DateTime Addition/Subtraction -->
+            <div class="calculator-section">
+                <h3>DateTime Addition/Subtraction</h3>
+                <div class="input-group">
+                    <label>Base DateTime:</label>
+                    <input type="datetime-local" id="datetime-base" class="datetime-input">
+                </div>
+                <div class="input-group">
+                    <label>Operation:</label>
+                    <select id="datetime-operation">
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Value:</label>
+                    <input type="number" id="datetime-value" min="0" class="number-input">
+                </div>
+                <div class="input-group">
+                    <label>Unit:</label>
+                    <select id="datetime-unit">
+                        <option value="seconds">Seconds</option>
+                        <option value="minutes">Minutes</option>
+                        <option value="hours">Hours</option>
+                        <option value="days">Days</option>
+                        <option value="weeks">Weeks</option>
+                        <option value="months">Months</option>
+                        <option value="years">Years</option>
+                    </select>
+                </div>
+                <button onclick="calculateDateTimeAddSubtract()" class="calculate-btn">Calculate</button>
+                <div id="datetime-addsub-result" class="result"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
