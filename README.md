@@ -2,6 +2,10 @@
 
 A comprehensive web-based calculator for performing various date and time calculations with support for multiple output formats.
 
+## 🚀 Live Demo
+
+**[Try it now!](https://rutvik24.github.io/date-time-calculator/)**
+
 ![Date Time Calculator](https://github.com/user-attachments/assets/8182ab4b-0f1e-4fe3-a062-6adfd78c0e2f)
 
 ## Features
@@ -85,9 +89,14 @@ Combines both date and time formats showing:
 - **Responsive Design**: Works on desktop and mobile devices
 - **No Dependencies**: Runs entirely in the browser
 - **Modern UI**: Clean, intuitive interface with gradient styling
+- **Deployment**: Automatically deployed to GitHub Pages via GitHub Actions
 
 ## Getting Started
 
+### Option 1: Use the Live Demo
+Simply visit **[https://rutvik24.github.io/date-time-calculator/](https://rutvik24.github.io/date-time-calculator/)** to use the calculator immediately.
+
+### Option 2: Local Development
 1. Clone the repository:
    ```bash
    git clone https://github.com/rutvik24/date-time-calculator.git
@@ -99,6 +108,13 @@ Combines both date and time formats showing:
    ```
 
 3. Navigate to `http://localhost:8000` in your browser
+
+## Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions. The deployment workflow:
+- Triggers on pushes to the `main` branch
+- Uses the latest GitHub Actions for Pages deployment
+- Serves the static files directly from the repository root
 
 ## Browser Compatibility
 
