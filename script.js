@@ -20,23 +20,63 @@ function openTab(evt, tabName) {
 }
 
 // Utility functions for date/time calculations
-function formatMultipleUnits(totalDays, totalHours, totalMinutes, totalSeconds) {
+function calculateAccurateDateDifference(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    let days = end.getDate() - start.getDate();
+    
+    // Adjust if days is negative
+    if (days < 0) {
+        months--;
+        // Get the last day of the previous month
+        const prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+        days += prevMonth.getDate();
+    }
+    
+    // Adjust if months is negative
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+    
+    return { years, months, days };
+}
+
+function formatMultipleUnits(totalDays, totalHours, totalMinutes, totalSeconds, startDate = null, endDate = null) {
     const results = [];
     
     if (totalDays > 0) {
-        const years = Math.floor(totalDays / 365);
-        const months = Math.floor((totalDays % 365) / 30);
-        const days = totalDays % 30;
-        
-        if (years > 0) results.push(`${years} year${years !== 1 ? 's' : ''}`);
-        if (months > 0) results.push(`${months} month${months !== 1 ? 's' : ''}`);
-        if (days > 0) results.push(`${days} day${days !== 1 ? 's' : ''}`);
+        // If we have start and end dates, calculate accurate difference
+        if (startDate && endDate) {
+            const { years, months, days } = calculateAccurateDateDifference(startDate, endDate);
+            
+            if (years > 0) results.push(`${years} year${years !== 1 ? 's' : ''}`);
+            if (months > 0) results.push(`${months} month${months !== 1 ? 's' : ''}`);
+            if (days > 0) results.push(`${days} day${days !== 1 ? 's' : ''}`);
+        } else {
+            // Fallback to simple calculation if dates not provided (legacy behavior)
+            const years = Math.floor(totalDays / 365);
+            const months = Math.floor((totalDays % 365) / 30);
+            const days = totalDays % 30;
+            
+            if (years > 0) results.push(`${years} year${years !== 1 ? 's' : ''}`);
+            if (months > 0) results.push(`${months} month${months !== 1 ? 's' : ''}`);
+            if (days > 0) results.push(`${days} day${days !== 1 ? 's' : ''}`);
+        }
         
         // Also show in other units
         results.push(`Total: ${totalDays} days`);
-        if (totalDays <= 12 * 30) {
-            results.push(`Total: ${Math.floor(totalDays / 30)} months and ${totalDays % 30} days`);
+        
+        // Calculate accurate months and days representation
+        if (startDate && endDate && totalDays <= 365) {
+            const { years, months, days } = calculateAccurateDateDifference(startDate, endDate);
+            const totalMonths = years * 12 + months;
+            results.push(`Total: ${totalMonths} month${totalMonths !== 1 ? 's' : ''} and ${days} day${days !== 1 ? 's' : ''}`);
         }
+        
         if (totalDays <= 8 * 7) {
             results.push(`Total: ${Math.floor(totalDays / 7)} weeks and ${totalDays % 7} days`);
         }
@@ -107,7 +147,7 @@ function calculateDateDifference() {
     const timeDifference = end.getTime() - start.getTime();
     const dayDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
     
-    const results = formatMultipleUnits(dayDifference, 0, 0, 0);
+    const results = formatMultipleUnits(dayDifference, 0, 0, 0, start, end);
     displayResults(resultElement, results);
 }
 
@@ -241,7 +281,7 @@ function calculateDateTimeDifference() {
     let results = [];
     
     if (totalDays > 0) {
-        results = results.concat(formatMultipleUnits(totalDays, 0, 0, 0));
+        results = results.concat(formatMultipleUnits(totalDays, 0, 0, 0, start, end));
     }
     
     // Add time-specific results
