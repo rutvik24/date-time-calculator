@@ -47,6 +47,7 @@ h1 {
     font-weight: 600;
     transition: all 0.3s ease;
     color: #b8bcc8;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .tab-btn:hover {
@@ -143,6 +144,7 @@ select:focus {
     transition: all 0.3s ease;
     margin: 20px 0;
     box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .calculate-btn:hover {
